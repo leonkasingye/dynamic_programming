@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dynamic application</title>
+        <style>
+            body { background-color: darkcyan; }
+            .color-controls {
+                margin-top: 20px;
+            }
+            .color-controls label {
+                font-weight: bold;
+            }
+            .color-controls input[type="text"] {
+                padding: 5px;
+                margin-right: 10px;
+            }
+            .color-controls button {
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body onload="greet()">
+        <p>
+            <button onclick="alert('subscribe to my channel')">Click me</button>
+        </p>
+        <p id="text">This is my first HTML, CSS, Javascript fusion</p>
+        <button onclick="toggleText()">Change Text</button>
+
+        <!-- Color controls -->
+        <div class="color-controls">
+            <label for="colorText">Enter a color (name or hex):</label>
+            <input type="text" id="colorText" placeholder="e.g., red or #ff0000">
+            <button onclick="changeBackgroundColorFromText()">Apply Color</button>
+            <br><br>
+            <label for="colorPicker">Or pick a color:</label>
+            <input type="color" id="colorPicker" value="#00ced1">
+            <button onclick="changeBackgroundColorFromPicker()">Apply Picked Color</button>
+        </div>
+
+        <button id="click">Internal Javascript</button>
+
+        <script>
+            function greet() {
+                alert("Welcome to the dynamic world");
+            }
+
+            // Function to toggle text
+            function toggleText() {
+                const textElement = document.getElementById("text");
+                if (textElement.innerHTML === "This is my first HTML, CSS, Javascript fusion") {
+                    textElement.innerHTML = "I am testing inline Javascript";
+                } else {
+                    textElement.innerHTML = "This is my first HTML, CSS, Javascript fusion";
+                }
+            }
+
+            // Function to change background color from text input
+            function changeBackgroundColorFromText() {
+                const colorText = document.getElementById("colorText").value.trim();
+                const body = document.body;
+
+                if (!colorText) {
+                    alert("Input is empty. Using default color.");
+                    body.style.backgroundColor = "darkcyan"; // Default color
+                    return;
+                }
+
+                // Test if the color is valid
+                const tempElement = document.createElement("div");
+                tempElement.style.backgroundColor = colorText;
+                const isValidColor = tempElement.style.backgroundColor !== "";
+
+                if (isValidColor) {
+                    body.style.backgroundColor = colorText;
+                } else {
+                    alert("Invalid color. Please enter a valid color name or hex code.");
+                }
+            }
+
+            // Function to change background color from color picker
+            function changeBackgroundColorFromPicker() {
+                const colorPicker = document.getElementById("colorPicker");
+                const selectedColor = colorPicker.value;
+
+                if (!selectedColor) {
+                    alert("No color selected. Using default color.");
+                    document.body.style.backgroundColor = "darkcyan"; // Default color
+                } else {
+                    document.body.style.backgroundColor = selectedColor;
+                }
+            }
+
+            // Internal JavaScript for button hover effect
+            const buttonID = document.getElementById("click");
+
+            buttonID.onmouseover = function () {
+                buttonID.style.color = "red";
+            };
+
+            buttonID.onmouseout = function () {
+                buttonID.style.color = "darkblue";
+            };
+        </script>
+    </body>
+</html>
